@@ -59,7 +59,7 @@
 
 
 
-;(setq show-trailing-whitespace t)
+(setq show-trailing-whitespace t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
@@ -246,6 +246,12 @@
   (whitespace-mode t))
 
 (add-hook 'cython-mode-hook 'myyy-cython-hook)
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
