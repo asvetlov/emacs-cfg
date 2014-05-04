@@ -33,11 +33,10 @@
   (scroll-bar-mode nil) ;; no scroll bar
   )
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(coffee-tab-width 4)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(default-input-method "russian-computer")
  '(delete-old-versions t)
@@ -51,10 +50,6 @@
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
- '(pdb-path (quote /usr/lib/python3\.2/pdb\.py))
- '(python-honour-comment-indentation t)
- '(python-mode-hook (quote (myyy-python-hook (lambda nil (load abbrev-file-name nil t)) (lambda nil (when py-smart-indentation (if (bobp) (save-excursion (save-restriction (widen) (while (and (not (eobp)) (or (let ((erg (syntax-ppss))) (or (nth 1 erg) (nth 8 erg))) (eq 0 (current-indentation)))) (forward-line 1)) (back-to-indentation) (py-guess-indent-offset))) (py-guess-indent-offset)))) (lambda nil (setq indent-tabs-mode py-indent-tabs-mode) (set (make-local-variable (quote beginning-of-defun-function)) (quote py-beginning-of-def-or-class)) (set (make-local-variable (quote end-of-defun-function)) (quote py-end-of-def-or-class))))))
- '(rst-level-face-base-color "grey60")
  '(safe-local-variable-values (quote ((test-case-name . twisted\.trial\.test) (test-case-name . twisted\.test\.test_internet\,twisted\.internet\.test\.test_posixbase) (test-case-name . twisted\.test\.test_ssl) (test-case-name . twisted\.test\.test_stdio) (test-case-name . twisted\.test\.test_fdesc) (encoding . utf-8) (test-case-name . twisted) (test-case-name . twisted\.test\.test_failure) (test-case-name . twisted\.test\.test_defer\,twisted\.test\.test_defgen\,twisted\.internet\.test\.test_inlinecb) (test-case-name . twisted\.test\.test_process) (test-case-name . twisted\.test\.test_iutils) (test-case-name . twisted\.words\.test\.test_jabbercomponent) (test-case-name . twisted\.words\.test\.test_jabberclient) (test-case-name . twisted\.test\.test_abstract) (test-case-name . twisted\.internet\.test\.test_pollingfile) (test-case-name . twisted\.test\.test_task\,twisted\.test\.test_cooperator) (test-case-name . twisted\.internet\.test\.test_inotify) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.web\.test\.test_xmlrpc))))
  '(save-interprogram-paste-before-kill t)
  '(scroll-step 1)
@@ -125,8 +120,11 @@
 
 (setq ispell-program-name "aspell")
 
+(add-to-list 'interpreter-mode-alist '("python3" . python-mode))
 (setq py-shell-name "ipython3")
 (setq py-load-pymacs-p t)
+(elpy-enable)
+(setq elpy-rpc-python-command "python3")
 ;(require 'auto-complete-config)
 ;(ac-config-default)
 
@@ -165,6 +163,8 @@
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;rst-mode
+;'(rst-level-face-base-color "grey60")
+
 (defun myyy-rst-hook ()
   (setq tab-width 4
         indent-tabs-mode nil)
@@ -176,6 +176,8 @@
 ;coffee-mode
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
+'(coffee-tab-width 4)
 
 (defun myyy-coffee-hook ()
   (setq tab-width 4
@@ -214,9 +216,9 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:height 113 :family "DejaVu Sans Mono")))))
 
