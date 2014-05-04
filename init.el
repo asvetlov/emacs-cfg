@@ -1,5 +1,11 @@
 (server-start)
 
+
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
+
 (add-to-list 'load-path "~/.emacs.d/")
 
 (setq inhibit-splash-screen t) ;; no splash screen
@@ -10,6 +16,7 @@
 (setq tab-width 4
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab)
       whitespace-line-column 80)
+
 
 (setq c-basic-offset 4)
 
@@ -59,56 +66,13 @@
 
 
 
-(setq show-trailing-whitespace t)
+;(setq show-trailing-whitespace t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
 ;; --------------------------- tango -------------------------
-(require 'color-theme)
-(setq color-theme-load-all-themes nil)
-
-(add-to-list 'load-path "~/.emacs.d/color-theme-tangotango")
-(require 'color-theme-tangotango)
-
-;; select theme - first list element is for windowing system, second is for console/terminal
-;; Source : http://www.emacswiki.org/emacs/ColorTheme#toc9
-(setq color-theme-choices 
-      '(color-theme-tangotango color-theme-tangotango))
-
-;; default-start
-(funcall (lambda (cols)
-    	   (let ((color-theme-is-global nil))
-    	     (eval 
-    	      (append '(if (window-system))
-    		      (mapcar (lambda (x) (cons x nil)) 
-    			      cols)))))
-    	 color-theme-choices)
-
-;; test for each additional frame or console
-(require 'cl)
-(fset 'test-win-sys 
-      (funcall (lambda (cols)
-    		 (lexical-let ((cols cols))
-    		   (lambda (frame)
-    		     (let ((color-theme-is-global nil))
-		       ;; must be current for local ctheme
-		       (select-frame frame)
-		       ;; test winsystem
-		       (eval 
-			(append '(if (window-system frame)) 
-				(mapcar (lambda (x) (cons x nil)) 
-					cols)))))))
-    	       color-theme-choices ))
-;; hook on after-make-frame-functions
-(add-hook 'after-make-frame-functions 'test-win-sys)
-
-(color-theme-tangotango)
-;;
-;(if window-system
-;    (color-theme-tangotango))
-;;(if (not (window-system))
-;;    (color-theme-tty-dark))
-;; ------------------------- end tango ----------------------------------
+(load-theme 'tangotango t)  
+; ------------------------- end tango ----------------------------------
 
 ;;(require `ido)
 ;;(ido-mode t)
@@ -161,9 +125,6 @@
 
 (setq ispell-program-name "aspell")
 
-(setq py-install-directory "~/.emacs.d/python-mode")
-(add-to-list 'load-path py-install-directory)
-(require 'python-mode)
 (setq py-shell-name "ipython3")
 (setq py-load-pymacs-p t)
 ;(require 'auto-complete-config)
@@ -180,7 +141,7 @@
 
 (add-hook 'python-mode-hook 'myyy-python-hook)
 
-(require `web-mode)
+;web-mode
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
@@ -203,6 +164,7 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+;rst-mode
 (defun myyy-rst-hook ()
   (setq tab-width 4
         indent-tabs-mode nil)
@@ -211,9 +173,7 @@
 
 (add-hook 'rst-mode-hook 'myyy-rst-hook)
 
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
-(require 'coffee-mode)
-
+;coffee-mode
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
@@ -225,7 +185,7 @@
 
 (add-hook 'coffee-mode-hook 'myyy-coffee-hook)
 
-(require 'actionscript-mode)
+;actionscript-mode
 (add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
 
 (defun myyy-actionscript-hook ()
@@ -236,7 +196,7 @@
 
 (add-hook 'actionscript-mode-hook 'myyy-actionscript-hook)
 
-(require 'cython-mode)
+;cython-mode
 (add-to-list 'auto-mode-alist '("\\.pyx$" . cython-mode))
 
 (defun myyy-cython-hook ()

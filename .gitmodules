@@ -1,9 +1,0 @@
-[submodule "color-theme-tangotango"]
-	path = color-theme-tangotango
-	url = https://github.com/juba/color-theme-tangotango.git
-[submodule "coffee-mode"]
-	path = coffee-mode
-	url = git://github.com/defunkt/coffee-mode.git
-[submodule "Fill-Column-Indicator"]
-	path = Fill-Column-Indicator
-	url = https://github.com/alpaker/Fill-Column-Indicator.git
