@@ -119,8 +119,9 @@
 
 (add-to-list 'interpreter-mode-alist '("python3" . python-mode))
 (setq python-shell-interpreter "ipython3")
-(elpy-enable)
+;(elpy-use-ipython)
 (setq elpy-rpc-python-command "python3")
+(elpy-enable)
 
 ;whitespace-mode
 (defun myyy-python-hook ()
