@@ -41,8 +41,6 @@
  '(default-input-method "russian-computer")
  '(delete-old-versions t)
  '(frame-background-mode (quote dark))
- '(ido-enable-flex-matching t)
- '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(kill-do-not-save-duplicates t)
  '(kill-ring-max 10000)
@@ -50,12 +48,11 @@
  '(make-backup-files nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
- '(safe-local-variable-values (quote ((test-case-name . twisted\.trial\.test) (test-case-name . twisted\.test\.test_internet\,twisted\.internet\.test\.test_posixbase) (test-case-name . twisted\.test\.test_ssl) (test-case-name . twisted\.test\.test_stdio) (test-case-name . twisted\.test\.test_fdesc) (encoding . utf-8) (test-case-name . twisted) (test-case-name . twisted\.test\.test_failure) (test-case-name . twisted\.test\.test_defer\,twisted\.test\.test_defgen\,twisted\.internet\.test\.test_inlinecb) (test-case-name . twisted\.test\.test_process) (test-case-name . twisted\.test\.test_iutils) (test-case-name . twisted\.words\.test\.test_jabbercomponent) (test-case-name . twisted\.words\.test\.test_jabberclient) (test-case-name . twisted\.test\.test_abstract) (test-case-name . twisted\.internet\.test\.test_pollingfile) (test-case-name . twisted\.test\.test_task\,twisted\.test\.test_cooperator) (test-case-name . twisted\.internet\.test\.test_inotify) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.web\.test\.test_xmlrpc))))
+ '(safe-local-variable-values (quote ((require-final-newline) (test-case-name . twisted\.trial\.test) (test-case-name . twisted\.test\.test_internet\,twisted\.internet\.test\.test_posixbase) (test-case-name . twisted\.test\.test_ssl) (test-case-name . twisted\.test\.test_stdio) (test-case-name . twisted\.test\.test_fdesc) (encoding . utf-8) (test-case-name . twisted) (test-case-name . twisted\.test\.test_failure) (test-case-name . twisted\.test\.test_defer\,twisted\.test\.test_defgen\,twisted\.internet\.test\.test_inlinecb) (test-case-name . twisted\.test\.test_process) (test-case-name . twisted\.test\.test_iutils) (test-case-name . twisted\.words\.test\.test_jabbercomponent) (test-case-name . twisted\.words\.test\.test_jabberclient) (test-case-name . twisted\.test\.test_abstract) (test-case-name . twisted\.internet\.test\.test_pollingfile) (test-case-name . twisted\.test\.test_task\,twisted\.test\.test_cooperator) (test-case-name . twisted\.internet\.test\.test_inotify) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.web\.test\.test_xmlrpc))))
  '(save-interprogram-paste-before-kill t)
  '(scroll-step 1)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
- '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
  '(x-select-enable-clipboard t)
  '(x-select-enable-primary nil))
 
@@ -65,15 +62,15 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
-;; --------------------------- tango -------------------------
 (load-theme 'tangotango t)  
-; ------------------------- end tango ----------------------------------
 
-;;(require `ido)
-;;(ido-mode t)
-;;(setq ido-enable-flex-matching t)
-;;(require `uniquify)
-(autoload 'ffap "fflap" "" t)
+;(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-use-filename-at-point 'guess)
+(ido-mode t)
+(require 'uniquify)
+(setq uniquify-buffer-name-style t)
 
 ;(require 'org-install)
 (autoload 'org-install "org-install" "" t)
@@ -121,23 +118,20 @@
 (setq ispell-program-name "aspell")
 
 (add-to-list 'interpreter-mode-alist '("python3" . python-mode))
-(setq py-shell-name "ipython3")
-(setq py-load-pymacs-p t)
+(setq python-shell-interpreter "ipython3")
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")
-;(require 'auto-complete-config)
-;(ac-config-default)
 
 ;whitespace-mode
 (defun myyy-python-hook ()
-  ;(setq tab-width 4
-  ;      py-indent-offset 4
-  ;      indent-tabs-mode nil
-  ;      py-smart-indentation t)
   (require 'whitespace)
   (whitespace-mode t))
 
 (add-hook 'python-mode-hook 'myyy-python-hook)
+(require 'virtualenvwrapper)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+;(venv-initialize-eshell) ;; if you want eshell support
+(setq venv-location "~/projects/envs/")
 
 ;web-mode
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
